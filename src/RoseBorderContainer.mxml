@@ -40,7 +40,7 @@
 				} else if (num.charAt(num.length-1) == "5") {
 					comment = "..i hope it makes you smile..";
 				} else if (num.charAt(num.length-1) == "6") {
-					comment = "..миллион алых роз для тебя Наташа..";
+					comment = "..миллион алых роз для тебя Катя..";
 				} else if (num.charAt(num.length-1) == "7") {
 					comment = "..i think about you all the time..";
 				} else if (num.charAt(num.length-1) == "8") {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<app>
+
+	<mode name="romantic"/>
+	<mode name="spring"/>
+	<mode name="hote"/>
+	<mode name="lamour"/>
+
+</app>

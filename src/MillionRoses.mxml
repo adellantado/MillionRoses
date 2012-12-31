@@ -3,7 +3,7 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
 			   creationComplete="applicationCreationComplete(event)"
-			   backgroundColor="0x000000">
+			   backgroundColor="0x000000" xmlns:local="*">
 	
 	<fx:Script>
 		<![CDATA[
@@ -13,6 +13,7 @@
 			import mx.managers.PopUpManager;
 			
 			import spark.components.Image;
+			import spark.primitives.BitmapImage;
 			
 			[Embed(source="red-rose.png")]
 			public var rose: Class;
@@ -47,8 +48,8 @@
 				return {x: randomX+xDeviation, y: randomY+yDeviation, size: randomSize, rotation: randomRotation};
 			}
 			
-			public function getImage(): Image {
-				var image: Image = new Image();
+			public function getImage(): BitmapImage {
+				var image: BitmapImage = new BitmapImage();
 				image.source = rose;
 				var rand: Object = generator();
 				image.x = rand.x;
@@ -76,11 +77,11 @@
 			}
 			
 			private function getSnapshot(): void {
-				var snapshot: ImageSnapshot = ImageSnapshot.captureImage(this, 300);
+				var snapshot: ImageSnapshot = ImageSnapshot.captureImage(holder, 300);
 				var background: Image = new Image();
 				background.source = snapshot.data;
-				removeAllElements();
-				addElement(background);
+				holder.removeAllElements();
+				holder.addElement(background);
 				background.percentHeight = 100;
 				background.percentWidth = 100;
 			}
@@ -98,7 +99,8 @@
 			
 			private function onTimer(event: TimerEvent): void {
 				popup.counter = counter--;
-				contentGroup.addElement(getImage());
+				//contentGroup.addElement(getImage());
+				holder.addElement(getImage());
 				if (counter % CLEAN_ROSES == 0) {
 					makeSnapshot();
 				}
@@ -106,5 +108,10 @@
 			
 		]]>
 	</fx:Script>
+	
+	<s:Group id="holder"
+			 width="100%" height="100%"/>
+	
+	<local:Header />
 	
 </s:Application>
