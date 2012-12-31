@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   creationComplete="applicationCreationComplete(event)"
+			   backgroundColor="0x000000">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			import mx.graphics.ImageSnapshot;
+			import mx.managers.PopUpManager;
+			
+			import spark.components.Image;
+			
+			[Embed(source="red-rose.png")]
+			public var rose: Class;
+			
+			public static const SIZE_SCALE: Number = 300;
+			public static const ROTATION_RANGE: Number = 180;
+			public static const CLEAN_ROSES: Number = 100;
+			
+			private var timer: Timer = new Timer(200);
+			
+			private var Xlimit: Number;
+			
+			private var Ylimit: Number;
+			
+			public var counter: uint = 1000000;
+			
+			public var popup: RoseDisplay;
+			
+			public function generator(): Object {
+				
+				Xlimit = FlexGlobals.topLevelApplication.width;
+				Ylimit = FlexGlobals.topLevelApplication.height;
+				
+				var randomX: Number = Math.random() * Xlimit;
+				var randomY: Number = Math.random() * Ylimit;
+				var randomSize: Number = Math.random() * SIZE_SCALE;
+				var randomRotation: Number = Math.random() * ROTATION_RANGE;
+				
+				var xDeviation: int = -10;
+				var yDeviation: int = -10;
+				
+				return {x: randomX+xDeviation, y: randomY+yDeviation, size: randomSize, rotation: randomRotation};
+			}
+			
+			public function getImage(): Image {
+				var image: Image = new Image();
+				image.source = rose;
+				var rand: Object = generator();
+				image.x = rand.x;
+				image.y = rand.y;
+				image.width = rand.size;
+				image.height = rand.size;
+				image.rotation = rand.rotation;
+				image.alpha = 0.8;
+				image.smooth = true;
+				return image;
+			}
+				
+			private function makeSnapshot(): void {
+				timer.stop();
+				var popup: RoseBorderContainer = RoseBorderContainer(PopUpManager.createPopUp(this, RoseBorderContainer, false));
+				popup.counter = this.counter;
+				PopUpManager.centerPopUp(popup);
+				setTimeout(function(): void {
+					getSnapshot();
+					timer.start();
+					setTimeout(function(): void {
+						PopUpManager.removePopUp(popup);
+					},500)
+				},500)
+			}
+			
+			private function getSnapshot(): void {
+				var snapshot: ImageSnapshot = ImageSnapshot.captureImage(this, 300);
+				var background: Image = new Image();
+				background.source = snapshot.data;
+				removeAllElements();
+				addElement(background);
+				background.percentHeight = 100;
+				background.percentWidth = 100;
+			}
+			
+			protected function applicationCreationComplete(event: FlexEvent): void {
+				timer.addEventListener(TimerEvent.TIMER, onTimer);
+				timer.start();
+				addRoseDisplay();
+			}
+			
+			private function addRoseDisplay(): void {
+				popup = RoseDisplay(PopUpManager.createPopUp(this, RoseDisplay));
+				PopUpManager.centerPopUp(popup); 
+			}
+			
+			private function onTimer(event: TimerEvent): void {
+				popup.counter = counter--;
+				contentGroup.addElement(getImage());
+				if (counter % CLEAN_ROSES == 0) {
+					makeSnapshot();
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+</s:Application>

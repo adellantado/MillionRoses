@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   skinClass="RoseDisplaySkin"
+				   width="300"
+				   height="150"
+				   backgroundAlpha="0.8"
+				   backgroundColor="0xCD0000"
+				   cornerRadius="0"
+				   title="One Million Roses"
+				   color="0xffffff">
+	
+	<fx:Script>
+		<![CDATA[
+			
+			
+			private var _counter: uint;
+			
+			[Bindable]
+			private var _text: String;
+			
+			public function get counter(): uint {
+				return _counter;
+			}
+
+			public function set counter(value: uint): void {
+				_counter = value;
+				var str: String = _counter.toString();
+				var sub: uint = 7 - str.length;
+				if (sub > 0) {
+					var zeros: String = "";
+					for (var i: int = 0; i < sub; i++) {
+						zeros += "0"; 
+					}
+					str = zeros + str;
+				}
+				var firstTriad: String = str.substr(0, 1);
+				var secondTriad: String = str.substr(1, 3);
+				var thirdTriad: String = str.substr(4, 3);
+				_text = firstTriad + "." + secondTriad + "." + thirdTriad;
+			}
+
+			public function getText(): String {
+				return _text;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:VGroup width="100%" height="100%"
+			  horizontalAlign="center"
+			  verticalAlign="middle">
+		<s:Label text="{_text}"
+				 fontSize="60"
+				 color="0xffffff"/>
+	</s:VGroup>
+	
+	
+	
+</s:TitleWindow>
