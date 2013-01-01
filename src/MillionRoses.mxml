@@ -12,6 +12,9 @@
 			import mx.graphics.ImageSnapshot;
 			import mx.managers.PopUpManager;
 			
+			import snd.MusicLibrary;
+			import snd.SoundManager;
+			
 			import spark.components.Image;
 			import spark.primitives.BitmapImage;
 			
@@ -31,6 +34,9 @@
 			public var counter: uint = 1000000;
 			
 			public var popup: RoseDisplay;
+			
+			[Bindable]
+			public var soundManager: SoundManager;
 			
 			public function generator(): Object {
 				
@@ -90,6 +96,8 @@
 				timer.addEventListener(TimerEvent.TIMER, onTimer);
 				timer.start();
 				addRoseDisplay();
+				
+				soundManager = new SoundManager(new MusicLibrary(["02 Rope.mp3", "03 Dear Rosemary.mp3", "04 White Limo.mp3"]));
 			}
 			
 			private function addRoseDisplay(): void {
@@ -112,6 +120,6 @@
 	<s:Group id="holder"
 			 width="100%" height="100%"/>
 	
-	<local:Header />
+	<local:Header volume="@{soundManager.volume}"/>
 	
 </s:Application>
