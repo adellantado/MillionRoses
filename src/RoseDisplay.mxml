@@ -8,8 +8,9 @@
 				   backgroundAlpha="0.8"
 				   backgroundColor="0xCD0000"
 				   cornerRadius="0"
-				   title="One Million Roses"
+				  
 				   color="0xffffff">
+	<!-- title="One Million Roses"-->
 	
 	<fx:Script>
 		<![CDATA[
