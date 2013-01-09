@@ -91,11 +91,11 @@
         <s:Ellipse left="-1" top="-1" right="-1" bottom="-1">
             <s:stroke>
                 <s:LinearGradientStroke rotation="90" weight="1">
-                    <s:GradientEntry color="0xFF0000" 
+                    <s:GradientEntry color="0xFFFFFF" 
                                    color.downStates="0xFFFFFF"
                                    alpha="0.011"
                                    alpha.downStates="0" />
-                    <s:GradientEntry color="0x000000" 
+                    <s:GradientEntry color="0xFFFFFF" 
                                    color.downStates="0xFFFFFF" 
                                    alpha="0.121"
                                    alpha.downStates="0.57" />
@@ -108,12 +108,12 @@
             <s:fill>
                 <s:LinearGradient rotation="90">
                     <s:GradientEntry color="0xFF0000" 
-                                   color.overStates="0xBBBDBD" 
-                                   color.downStates="0xAAAAAA" 
+                                   color.overStates="0xFF0000" 
+                                   color.downStates="0xFF0000" 
                                    alpha="0.85" />
-                    <s:GradientEntry color="0xD8D8D8" 
-                                   color.overStates="0x9FA0A1" 
-                                   color.downStates="0x929496" 
+                    <s:GradientEntry color="0xFF0000" 
+                                   color.overStates="0xFF0000" 
+                                   color.downStates="0xFF0000" 
                                    alpha="0.85" />
                 </s:LinearGradient>
             </s:fill>
@@ -122,7 +122,7 @@
         <!-- fill highlight -->
         <s:Path data="M 1 6 Q 2 2 6 1 Q 11 2 12 6 h -9">
             <s:fill>
-                <s:SolidColor color="0xFFFFFF" alpha="0.33" />
+                <s:SolidColor color="0xFF0000" alpha="0.33" />
             </s:fill>
         </s:Path>
         
@@ -131,7 +131,7 @@
             <s:stroke>
                 <s:LinearGradientStroke rotation="90" weight="1">
                     <s:GradientEntry color="0xFFFFFF" color.downStates="0x939393" alpha.overStates="0.22" />
-                    <s:GradientEntry color="0xD8D8D8" color.downStates="0xB1B1B1" alpha.overStates="0.22" />
+                    <s:GradientEntry color="0xFF0000" color.downStates="0xB1B1B1" alpha.overStates="0.22" />
                 </s:LinearGradientStroke>
             </s:stroke>
         </s:Ellipse>
@@ -146,11 +146,7 @@
         <!-- border - put on top of the fill so it doesn't disappear when scale is less than 1 -->
         <s:Ellipse left="0" top="0" right="0" bottom="0">
             <s:stroke>
-                <!--<s:LinearGradientStroke rotation="90" weight="1">
-                    <s:GradientEntry color="0xFF0000" alpha="0.70" />
-                    <s:GradientEntry color="0xFF0000" alpha="0.80" />
-                </s:LinearGradientStroke>-->
-				<s:SolidColorStroke color="0xFF0000"/>
+				<s:SolidColorStroke color="0xFFFFFF"/>
             </s:stroke>
         </s:Ellipse>
         

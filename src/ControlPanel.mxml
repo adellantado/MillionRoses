@@ -2,6 +2,12 @@
 <s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   skinClass="skins.RoseDisplaySkin"
+			   width="300"
+			   height="150"
+			   backgroundAlpha="0.8"
+			   backgroundColor="0xCD0000"
+			   cornerRadius="0"
 			   title="Adjust what you préférer">
 	
 	<fx:Script>

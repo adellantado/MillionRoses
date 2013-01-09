@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   skinClass="skins.RoseDisplaySkin"
+			   width="300" height="150"
+			   backgroundAlpha="0.8"
+			   backgroundColor="0xCD0000"
+			   cornerRadius="0"
+			   color="0xffffff"
+			   title="Time To..">
+	
+	<fx:Script>
+		<![CDATA[
+			
+			[Bindable]
+			public var text: String;
+			
+			[Bindable]
+			public var isComplete: Boolean;
+			
+			private var endDate: Date = new Date(2013, 00, 18);
+			
+			public function interrupt(): void {
+				if (!isComplete) {
+					var subTime: Number = (endDate.time - new Date().time) / 1000;
+					var h: Number = Math.floor(subTime / 3600);
+					var subM: Number = (subTime / 3600 - Math.floor(subTime / 3600)) * 60;
+					var m: Number = Math.floor(subM);
+					var subS: Number = (subM - Math.floor(subM)) * 60;
+					var s: Number = Math.floor(subS);
+					text = zeros(h)+":"+ zeros(m) + ":" + zeros(s);
+					if (text == "00:00:00") {
+						isComplete = true;
+					}
+				}
+			}
+			
+			private function zeros(value: Number): String {
+				var result: String = value.toString();
+				if (value < 10 && value > 0) {
+					result = "0"+result;
+				} else if (value <= 0) {
+					result = "00";
+				}
+				return result;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:VGroup width="100%" height="100%"
+			  horizontalAlign="center"
+			  verticalAlign="middle">
+		<s:Label text="{text}"
+				 fontSize="60"
+				 color="0xffffff"/>
+	</s:VGroup>
+	
+</s:TitleWindow>

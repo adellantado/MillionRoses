@@ -3,7 +3,8 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx" 
 			   creationComplete="applicationCreationComplete(event)"
-			   backgroundColor="0x000000" xmlns:local="*">
+			   backgroundColor="0x000000" xmlns:local="*"
+			   >
 	
 	<fx:Script>
 		<![CDATA[
@@ -13,7 +14,6 @@
 			import mx.graphics.ImageSnapshot;
 			import mx.managers.PopUpManager;
 			
-			import snd.MusicLibrary;
 			import snd.SoundManager;
 			
 			import spark.components.Image;
@@ -26,7 +26,7 @@
 			public static const ROTATION_RANGE: Number = 180;
 			public static const CLEAN_ROSES: Number = 100;
 			
-			private var timer: Timer = new Timer(200);
+			private var timer: Timer = new Timer(1000);
 			
 			private var Xlimit: Number;
 			
@@ -36,6 +36,7 @@
 			
 			public var roseDisplay: RoseDisplay;
 			public var controlDisplay: ControlPanel;
+			public var timerDisplay: TimerDisplay;
 			
 			[Bindable]
 			public var soundManager: SoundManager;
@@ -96,12 +97,12 @@
 			
 			protected function applicationCreationComplete(event: FlexEvent): void {
 				timer.addEventListener(TimerEvent.TIMER, onTimer);
+				timerDisplay = TimerDisplay(addDisplay(TimerDisplay));
 				timer.start();
-				roseDisplay = RoseDisplay(addDisplay(RoseDisplay));
-				controlDisplay = ControlPanel(addDisplay(ControlPanel));
+				//roseDisplay = RoseDisplay(addDisplay(RoseDisplay));
+				//controlDisplay = ControlPanel(addDisplay(ControlPanel));
 				
-				
-				soundManager = new SoundManager(new MusicLibrary(["02 Rope.mp3", "03 Dear Rosemary.mp3", "04 White Limo.mp3"]));
+				//soundManager = new SoundManager(new MusicLibrary(["02 Rope.mp3", "03 Dear Rosemary.mp3", "04 White Limo.mp3"]));
 			}
 			
 			private function addDisplay(popupClass: Class): IFlexDisplayObject {
@@ -111,12 +112,13 @@
 			}
 			
 			private function onTimer(event: TimerEvent): void {
-				roseDisplay.counter = counter--;
-				//contentGroup.addElement(getImage());
-				//holder.addElement(getImage());
+				/* roseDisplay.counter = counter--;
+				contentGroup.addElement(getImage());
+				holder.addElement(getImage());
 				if (counter % CLEAN_ROSES == 0) {
 					makeSnapshot();
-				}
+				} */
+				timerDisplay.interrupt();
 			}
 			
 		]]>
@@ -125,6 +127,6 @@
 	<s:Group id="holder"
 			 width="100%" height="100%"/>
 	
-	<local:Header volume="@{soundManager.volume}"/>
+	<!--<local:Header volume="@{soundManager.volume}"/>-->
 	
 </s:Application>
