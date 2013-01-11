@@ -60,7 +60,7 @@ package snd {
 		private function onSoundComplete(event: Event): void {
 			channel = null;
 			pauseTime = 0;
-			start();
+			//start();
 		}
 		
 		private function onID3Available(event: Event): void {

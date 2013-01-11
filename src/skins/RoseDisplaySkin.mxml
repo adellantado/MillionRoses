@@ -246,8 +246,12 @@
                 <s:Group id="moveArea" left="0" right="0" top="0" bottom="0" />
                 
                 <!--- @copy spark.components.TitleWindow#closeButton -->
-                <!--<s:Button id="closeButton" skinClass="spark.skins.spark.TitleWindowCloseButtonSkin"
-                          width="15" height="15" right="7" top="7" />-->
+				<!--<s:HSlider right="7" top="7"
+						   minimum="0" maximum="1" 
+						   snapInterval="0.01"/>-->
+                <!--<s:Button id="doButton" icon="@Embed(source='volume-icon_16.png')"
+                          width="16" height="16" right="7" top="7" />-->
+				<!--skinClass="spark.skins.spark.TitleWindowCloseButtonSkin"-->
             </s:Group>
             
             <!--
