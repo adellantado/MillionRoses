@@ -58,7 +58,7 @@ package snd {
 		}
 		
 		private function onSoundComplete(event: Event): void {
-			channel = null;
+			//channel = null;
 			pauseTime = 0;
 			//start();
 		}
