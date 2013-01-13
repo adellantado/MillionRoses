@@ -2,9 +2,9 @@ package snd {
 	
 	public interface IMusicLibrary {
 		
-		function currentSong(): String;
+		function currentSong(): Object;
 		
-		function nextSong(): String;
+		function nextSong(): Object;
 		
 	}
 }

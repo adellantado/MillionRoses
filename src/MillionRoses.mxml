@@ -28,7 +28,7 @@
 			public static const ROTATION_RANGE: Number = 180;
 			public static const CLEAN_ROSES: Number = 100;
 			
-			private var timer: Timer = new Timer(1000);
+			private var timer: Timer = new Timer(100);
 			
 			private var Xlimit: Number;
 			
@@ -43,6 +43,9 @@
 			
 			[Bindable]
 			public var soundManager: SoundManager;
+			
+			[Bindable]
+			public var configController: ConfigController;
 			
 			public function generator(): Object {
 				
@@ -60,8 +63,8 @@
 				return {x: randomX+xDeviation, y: randomY+yDeviation, size: randomSize, rotation: randomRotation};
 			}
 			
-			public function getImage(): BitmapImage {
-				var image: BitmapImage = new BitmapImage();
+			public function getImage(): Bitmap {
+				/* var image: BitmapImage = new BitmapImage();
 				image.source = rose;
 				var rand: Object = generator();
 				image.x = rand.x;
@@ -71,6 +74,17 @@
 				image.rotation = rand.rotation;
 				image.alpha = 0.8;
 				image.smooth = true;
+				return image; */
+				
+				var image: Bitmap = new rose as Bitmap;
+				var rand: Object = generator();
+				image.x = rand.x;
+				image.y = rand.y;
+				image.width = rand.size;
+				image.height = rand.size;
+				image.rotation = rand.rotation;
+				image.alpha = 0.8;
+				image.smoothing = true;
 				return image;
 			}
 				
@@ -89,11 +103,13 @@
 			}
 			
 			private function getSnapshot(): void {
-				var snapshot: ImageSnapshot = ImageSnapshot.captureImage(holder, 300);
+				var snapshot: ImageSnapshot = ImageSnapshot.captureImage(this, 100);
 				var background: Image = new Image();
 				background.source = snapshot.data;
-				holder.removeAllElements();
-				holder.addElement(background);
+				ui.removeChildren();
+				removeAllElements();
+				addElement(background);
+				addElement(ui);
 				background.percentHeight = 100;
 				background.percentWidth = 100;
 			}
@@ -102,10 +118,16 @@
 				timer.addEventListener(TimerEvent.TIMER, onTimer);
 				timerDisplay = TimerDisplay(addDisplay(TimerDisplay));
 				timer.start();
-				//roseDisplay = RoseDisplay(addDisplay(RoseDisplay));
-				//controlDisplay = ControlPanel(addDisplay(ControlPanel));
+				roseDisplay = RoseDisplay(addDisplay(RoseDisplay));
+				controlDisplay = ControlPanel(addDisplay(ControlPanel));
 				
-				soundManager = new SoundManager(new MusicLibrary(['celine_dion_-_my_heart_will_go_on.mp3']));
+				configController = new ConfigController();
+				configController.addEventListener(Event.COMPLETE, configComplete);
+			}
+			
+			private function configComplete(event: Event): void {
+				configController.removeEventListener(Event.COMPLETE, configComplete);
+				soundManager = new SoundManager(new MusicLibrary(ConfigController(event.target).songs));
 				//temp
 				BindingUtils.bindProperty(timerDisplay, "volume", soundManager, "volume");
 				BindingUtils.bindProperty(soundManager, "volume", timerDisplay, "volume");
@@ -118,21 +140,18 @@
 			}
 			
 			private function onTimer(event: TimerEvent): void {
-				/* roseDisplay.counter = counter--;
-				contentGroup.addElement(getImage());
-				holder.addElement(getImage());
+				 roseDisplay.counter = counter--;
+				ui.addChild(getImage());
 				if (counter % CLEAN_ROSES == 0) {
-					makeSnapshot();
-				} */
+					//makeSnapshot();
+					getSnapshot();
+				} 
 				timerDisplay.interrupt();
 			}
 			
 		]]>
 	</fx:Script>
 	
-	<s:Group id="holder"
-			 width="100%" height="100%"/>
-	
-	<!--<local:Header volume="@{soundManager.volume}"/>-->
+	<mx:UIComponent id="ui" width="100%" height="100%"/>
 	
 </s:Application>

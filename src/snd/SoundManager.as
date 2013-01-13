@@ -22,7 +22,7 @@ package snd {
 		}
 		
 		public function start(): void {
-			sound = new Sound(new URLRequest(musicLibrary.nextSong()));
+			sound = new Sound(new URLRequest(musicLibrary.nextSong().path));
 			sound.addEventListener(Event.COMPLETE, onComplete);
 			sound.addEventListener(Event.ID3, onID3Available);
 		}
@@ -60,7 +60,7 @@ package snd {
 		private function onSoundComplete(event: Event): void {
 			//channel = null;
 			pauseTime = 0;
-			//start();
+			start();
 		}
 		
 		private function onID3Available(event: Event): void {

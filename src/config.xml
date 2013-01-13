@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <app>
 
-	<mode name="romantic"/>
-	<mode name="spring"/>
-	<mode name="hote"/>
-	<mode name="lamour"/>
+	<modes>
+		<mode name="romantic">
+			<flowers></flowers>
+			<melodies>1</melodies>
+		</mode>
+		<mode name="spring"/>
+		<mode name="hote"/>
+		<mode name="lamour"/>
+	</modes>
 
 	<music>
-		<track name="test track" path="/music/test.mp3"/>
+		<track id="0" name="Свет былой любви" path="../music/ariya_-_svet_byloy_lyubvi.mp3"/>
+		<track id="1" name="I'm with you" path="../music/avril_lavigne_-_i_m_with_you.mp3"/>
+		<track id="2" name="Heaven" path="../music/bryan_adams_-_heaven.mp3"/>
+		<track id="3" name="My heart will go on" path="../music/celine_dion_-_my_heart_will_go_on.mp3"/>
+		<track id="4" name="My immortal" path="../music/evanescence_-_my_immortal.mp3"/>
+		<track id="5" name="Careless whisper" path="../music/george_michael_-_careless_whisper.mp3"/>
+		<track id="6" name="Because of you" path="../music/kelly_clarkson_-_because_of_you.mp3"/>
+		<track id="7" name="Je t'aime" path="../music/lara_fabian_-_je_t_aime.mp3"/>
+		<track id="8" name="Не питай" path="../music/okean_elzi_-_ne_pitay.mp3"/>
+		<track id="9" name="Така як ти" path="../music/okean_elzi_-_taka_yak_ti.mp3"/>
+		<track id="10" name="Right here waiting" path="../music/richard_marx_-_right_here_waiting.mp3"/>
+		<track id="11" name="A moment in a million years" path="../music/scorpions_-_a_moment_in_a_million_years.mp3"/>
+		<track id="12" name="When you came into my life" path="../music/scorpions_-_when_you_came_into_my_life.mp3"/>
+		<track id="13" name="I will always love you" path="../music/whitney_houston_-_i_will_always_love_you.mp3"/>
+		<track id="14" name="Yesterday" path="../music/the_beatles_-_yesterday.mp3"/>
 	</music>
 	
 </app>
