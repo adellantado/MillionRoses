@@ -53,8 +53,12 @@ package snd {
 		}
 		
 		public function set volume(value: Number): void {
-			transform.volume = value;
-			channel.soundTransform = transform;
+			if (value) {
+				transform.volume = value;
+				if (channel) {
+					channel.soundTransform = transform;
+				}
+			}
 		}
 		
 		private function onSoundComplete(event: Event): void {

@@ -32,7 +32,7 @@
 				if (num.charAt(num.length-1) == "1") {
 					comment = "..this flowers for you..";
 				} else if (num.charAt(num.length-1) == "2") {
-					comment = "..wait for me..";					
+					comment = "..once you said me that i owe you one  million roses. Here it is)..";					
 				} else if (num.charAt(num.length-1) == "3") {
 					comment = "..you are the most beautiful girl what i have ever seen..";
 				} else if (num.charAt(num.length-1) == "4") {
@@ -42,13 +42,13 @@
 				} else if (num.charAt(num.length-1) == "6") {
 					comment = "..миллион алых роз для тебя Катя..";
 				} else if (num.charAt(num.length-1) == "7") {
-					comment = "..i think about you all the time..";
+					comment = "..i wanna make you happy..";
 				} else if (num.charAt(num.length-1) == "8") {
 					comment = "..all we need is love.. \n          Beatles";
 				} else if (num.charAt(num.length-1) == "9") {
-					comment = "..believe in me..";
+					comment = "..ти божественно прекрасна..";
 				} else {
-					comment = "..i wanna make you happy..";
+					comment = "..Катя, з днем народження..";
 				}
 			}
 

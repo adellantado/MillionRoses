@@ -14,7 +14,7 @@
 		<![CDATA[
 			
 			[Bindable]
-			public var volume: Number;
+			public var volume: Number = 0.5;
 			
 			[Bindable]
 			public var text: String;
@@ -22,11 +22,10 @@
 			[Bindable]
 			public var isComplete: Boolean;
 			
-			private var endDate: Date = new Date(2013, 00, 18);
 			
 			public function interrupt(): void {
 				if (!isComplete) {
-					var subTime: Number = (endDate.time - new Date().time) / 1000;
+					var subTime: Number = (MillionRoses.DATE.time - new Date().time) / 1000;
 					var h: Number = Math.floor(subTime / 3600);
 					var subM: Number = (subTime / 3600 - Math.floor(subTime / 3600)) * 60;
 					var m: Number = Math.floor(subM);

@@ -28,6 +28,8 @@
 			public static const ROTATION_RANGE: Number = 180;
 			public static const CLEAN_ROSES: Number = 100;
 			
+			public static const DATE: Date = new Date(2013, 00, 18);
+			
 			private var timer: Timer = new Timer(500);
 			
 			private var Xlimit: Number;
@@ -99,8 +101,8 @@
 					timer.start();
 					setTimeout(function(): void {
 						PopUpManager.removePopUp(popup);
-					},500)
-				},500)
+					},300)
+				},300)
 			}
 			
 			private function getSnapshot(): void {
@@ -117,21 +119,39 @@
 			
 			protected function applicationCreationComplete(event: FlexEvent): void {
 				timer.addEventListener(TimerEvent.TIMER, onTimer);
-				timerDisplay = TimerDisplay(addDisplay(TimerDisplay));
+				initDisplays();
 				timer.start();
-				roseDisplay = RoseDisplay(addDisplay(RoseDisplay));
-				controlDisplay = ControlPanel(addDisplay(ControlPanel));
 				
 				configController = new ConfigController();
 				configController.addEventListener(Event.COMPLETE, configComplete);
+			}
+			
+			private function initDisplays(): void {
+				var currentDate: Date = new Date();
+				if (currentDate.time < DATE.time) {
+					timerDisplay = TimerDisplay(addDisplay(TimerDisplay));
+				} else {
+					roseDisplay = RoseDisplay(addDisplay(RoseDisplay));
+					if (soundManager) {
+						BindingUtils.bindProperty(roseDisplay, "volume", soundManager, "volume");
+						BindingUtils.bindProperty(soundManager, "volume", roseDisplay, "volume");
+					}
+				}
+				//controlDisplay = ControlPanel(addDisplay(ControlPanel));
 			}
 			
 			private function configComplete(event: Event): void {
 				configController.removeEventListener(Event.COMPLETE, configComplete);
 				soundManager = new SoundManager(new MusicLibrary(ConfigController(event.target).songs));
 				//temp
-				BindingUtils.bindProperty(timerDisplay, "volume", soundManager, "volume");
-				BindingUtils.bindProperty(soundManager, "volume", timerDisplay, "volume");
+				if (timerDisplay) {
+					BindingUtils.bindProperty(timerDisplay, "volume", soundManager, "volume");
+					BindingUtils.bindProperty(soundManager, "volume", timerDisplay, "volume");
+				} else {
+					BindingUtils.bindProperty(roseDisplay, "volume", soundManager, "volume");
+					BindingUtils.bindProperty(soundManager, "volume", roseDisplay, "volume");
+				}
+				
 			}
 			
 			private function addDisplay(popupClass: Class): IFlexDisplayObject {
@@ -141,13 +161,29 @@
 			}
 			
 			private function onTimer(event: TimerEvent): void {
-				 roseDisplay.counter = counter--;
-				ui.addChild(getImage());
-				if (counter % CLEAN_ROSES == 0) {
-					//makeSnapshot();
-					getSnapshot();
-				} 
-				timerDisplay.interrupt();
+				if (roseDisplay) {
+					roseDisplay.counter = counter--;
+					ui.addChild(getImage());
+					if (counter % CLEAN_ROSES == 0) {
+						makeSnapshot();
+					}
+				}
+				
+				if (timerDisplay) {
+					if (timerDisplay.isComplete) {
+						PopUpManager.removePopUp(timerDisplay);
+						timerDisplay = null;
+						roseDisplay = RoseDisplay(addDisplay(RoseDisplay));
+						if (soundManager) {
+							BindingUtils.bindProperty(roseDisplay, "volume", soundManager, "volume");
+							BindingUtils.bindProperty(soundManager, "volume", roseDisplay, "volume");
+							soundManager.stop();
+							soundManager.start();
+						}
+					} else {
+						timerDisplay.interrupt();
+					}
+				}
 			}
 			
 		]]>

@@ -18,6 +18,9 @@
 			private var _counter: uint;
 			
 			[Bindable]
+			public var volume: Number = 0.5;
+			
+			[Bindable]
 			private var _text: String;
 			
 			public function get counter(): uint {
@@ -47,6 +50,12 @@
 			
 		]]>
 	</fx:Script>
+	
+	<s:HSlider id="slider" x="{this.width - slider.width - 7}" y="-22"
+			   minimum="0" maximum="1" 
+			   value="@{volume}"
+			   snapInterval="0.01"
+			   skinClass="skins.VolumeSliderSkin"/>
 	
 	<s:VGroup width="100%" height="100%"
 			  horizontalAlign="center"
