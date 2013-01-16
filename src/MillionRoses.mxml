@@ -28,7 +28,7 @@
 			public static const ROTATION_RANGE: Number = 180;
 			public static const CLEAN_ROSES: Number = 100;
 			
-			private var timer: Timer = new Timer(100);
+			private var timer: Timer = new Timer(500);
 			
 			private var Xlimit: Number;
 			
@@ -85,6 +85,7 @@
 				image.rotation = rand.rotation;
 				image.alpha = 0.8;
 				image.smoothing = true;
+				fade.play([image]);
 				return image;
 			}
 				
@@ -151,6 +152,11 @@
 			
 		]]>
 	</fx:Script>
+	
+	<fx:Declarations>
+		<s:Fade id="fade" duration="1000"
+				alphaFrom="0" alphaTo="1" />
+	</fx:Declarations>
 	
 	<mx:UIComponent id="ui" width="100%" height="100%"/>
 	
